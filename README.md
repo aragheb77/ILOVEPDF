@@ -45,4 +45,4 @@ dotnet publish src/ILOVEPDF/ILOVEPDF.csproj -c Release -r win-x64 --self-contain
 GitHub Actions builds a self-contained Windows x64 single-file EXE, bundles LibreOffice under `LibreOffice/`, and uploads a portable package artifact. Keep the EXE and `LibreOffice` folder together so Office conversions work.
 
 ## Licensing
-The project code is MIT. PDFsharp, PdfPig, ClosedXML, and DocumentFormat.OpenXml are third-party open-source dependencies; review their current licenses and all transitive dependencies before distribution. LibreOffice is bundled separately under its own MPL-2.0 license and notices. Keep dependency notices with release artifacts. The app is not affiliated with or endorsed by iLovePDF.
+The project code is MIT. PDFsharp, PdfPig, ClosedXML, and DocumentFormat.OpenXml are third-party open-source dependencies; review their current licenses and all transitive dependencies before distribution. LibreOffice is bundled separately under its applicable MPL-2.0 and LGPLv3+ licenses; preserve its upstream notices. Keep dependency notices with release artifacts. The app is not affiliated with or endorsed by iLovePDF.
