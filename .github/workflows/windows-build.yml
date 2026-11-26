@@ -38,6 +38,8 @@ jobs:
           }
           New-Item -ItemType Directory -Force "src/ILOVEPDF/Resources" | Out-Null
           Compress-Archive -Path "$source\*" -DestinationPath "src/ILOVEPDF/Resources/LibreOfficeRuntime.zip" -CompressionLevel Optimal -Force
+      - name: Build with embedded Office runtime
+        run: dotnet build src/ILOVEPDF/ILOVEPDF.csproj -c Release --no-restore
       - name: Publish self-contained single-file EXE
         run: dotnet publish src/ILOVEPDF/ILOVEPDF.csproj -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -o artifacts/ILOVEPDF-win-x64
       - name: Remove temporary embedded runtime archive
