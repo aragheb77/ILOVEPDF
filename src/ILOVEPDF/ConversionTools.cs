@@ -1,4 +1,6 @@
 using Microsoft.Win32;
+using System;
+using System.IO;
 using PdfSharp.Drawing;
 using PdfSharp.Pdf;
 using PdfSharp.Pdf.IO;
@@ -120,7 +122,7 @@ public partial class MainWindow
 
             NewPage();
             const double maxWidth = 595.28 - margin * 2;
-            foreach (var sourceLine in text.Replace("\r\n", "\n").Replace('\r', '\n').Split('\n'))
+            foreach (var sourceLine in text.Replace("\r\n", "\n").Replace('\r', '\n').Split(new[] { '\n' }, StringSplitOptions.None))
             {
                 if (sourceLine.Length == 0)
                 {
@@ -128,7 +130,7 @@ public partial class MainWindow
                     if (y > page!.Height.Point - margin) NewPage();
                     continue;
                 }
-                var words = sourceLine.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+                var words = sourceLine.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
                 var line = new StringBuilder();
                 foreach (var word in words)
                 {
