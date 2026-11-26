@@ -67,6 +67,18 @@
                 </Border>
                 <Border Background="#FFFFFF" CornerRadius="16" Padding="24" Margin="0,20,0,0" BorderBrush="#E9EAED" BorderThickness="1">
                     <StackPanel>
+                        <TextBlock Text="Office conversions" FontSize="20" FontWeight="Bold" Foreground="#202124" Margin="0,0,0,8"/>
+                        <TextBlock Text="Convert Word, Excel and PowerPoint files locally — no cloud upload." Foreground="#747982" Margin="0,0,0,16"/>
+                        <WrapPanel>
+                            <Button Content="Office → PDF" Click="OfficeToPdf_Click" Padding="18,12" Margin="0,0,10,10" Background="#FFF3F2" Foreground="#D92D27"/>
+                            <Button Content="PDF → Word" Click="PdfToWord_Click" Padding="18,12" Margin="0,0,10,10"/>
+                            <Button Content="PDF → Excel" Click="PdfToExcel_Click" Padding="18,12" Margin="0,0,10,10"/>
+                            <Button Content="PDF → PowerPoint" Click="PdfToPowerPoint_Click" Padding="18,12" Margin="0,0,10,10"/>
+                        </WrapPanel>
+                    </StackPanel>
+                </Border>
+                <Border Background="#FFFFFF" CornerRadius="16" Padding="24" Margin="0,20,0,0" BorderBrush="#E9EAED" BorderThickness="1">
+                    <StackPanel>
                         <TextBlock Text="Quick actions" FontSize="20" FontWeight="Bold" Foreground="#202124"/>
                         <TextBlock Text="Choose a tool to get started. The original files are never overwritten." Foreground="#747982" Margin="0,6,0,0"/>
                         <TextBlock x:Name="StatusText" Text="Ready — choose a PDF tool." Foreground="#444A53" FontSize="13" Margin="0,20,0,0" TextWrapping="Wrap"/>
