@@ -104,7 +104,7 @@ public partial class MainWindow
                         ws.Cell(row, col + 1).Value = cells[col].Trim();
                     row++;
                 }
-                ws.Columns().AdjustToContents(1, 50);
+                ws.Columns().AdjustToContents();
             }
             workbook.SaveAs(save.FileName);
             SetStatus($"Extracted PDF text into Excel: {save.FileName}");
