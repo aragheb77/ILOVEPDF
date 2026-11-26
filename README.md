@@ -21,14 +21,14 @@ A Windows-first, offline PDF toolkit inspired by common PDF workflows. This is a
 - PDF to selectable text (.txt) using local text extraction
 - TXT to PDF with automatic line wrapping and pagination
 - Word, Excel, and PowerPoint files (DOC/DOCX/DOCM/ODT/RTF, XLS/XLSX/XLSM/ODS/CSV, PPT/PPTX/PPTM/ODP) to PDF
-- PDF to Word (DOCX) and PowerPoint (PPTX) through LibreOffice\n- PDF text to Excel (XLSX), separated into worksheets by PDF page; column/table reconstruction is heuristic
+- PDF to editable Word (DOCX) using local text extraction, and PowerPoint (PPTX) through LibreOffice\n- PDF text to Excel (XLSX), separated into worksheets by PDF page; column/table reconstruction is heuristic
 
 ### Security
 - Protect a PDF with an open password
 
 Also includes native file/folder pickers, output path selection, status messages, and error dialogs.
 
-**Conversion limitations:** PDF-to-text extracts selectable text only; scanned/image-only pages require OCR, which is not included yet. PDF-to-Excel extracts text into worksheets and does not guarantee original table layout. PDF-to-Word/PowerPoint may lose formatting because PDF does not preserve the original Office structure.
+**Conversion limitations:** PDF-to-text extracts selectable text only; scanned/image-only pages require OCR, which is not included yet. PDF-to-Excel extracts text into worksheets and does not guarantee original table layout. PDF-to-Word reconstructs editable text but does not preserve the original layout; PDF-to-PowerPoint may lose formatting because PDF does not preserve the original Office structure.
 
 ## Main feature coverage
 The wider iLovePDF catalog includes additional workflows such as PDF-to-image, OCR, compression, page reordering, watermarking, page numbering, forms, signatures, redaction, and repair. These are not all implemented yet. Office conversions use the free, open-source LibreOffice engine bundled in the portable package; it is a sizeable companion folder next to the app executable, not embedded inside the .NET EXE. All processing remains local, without paid services or cloud uploads.
@@ -45,4 +45,4 @@ dotnet publish src/ILOVEPDF/ILOVEPDF.csproj -c Release -r win-x64 --self-contain
 GitHub Actions builds a self-contained Windows x64 single-file EXE, bundles LibreOffice under `LibreOffice/`, and uploads a portable package artifact. Keep the EXE and `LibreOffice` folder together so Office conversions work.
 
 ## Licensing
-The project code is MIT. PDFsharp and PdfPig are third-party open-source dependencies; review their current licenses and all transitive dependencies before distribution. Keep dependency notices with release artifacts. The app is not affiliated with or endorsed by iLovePDF.
+The project code is MIT. PDFsharp, PdfPig, ClosedXML, and DocumentFormat.OpenXml are third-party open-source dependencies; review their current licenses and all transitive dependencies before distribution. LibreOffice is bundled separately under its own MPL-2.0 license and notices. Keep dependency notices with release artifacts. The app is not affiliated with or endorsed by iLovePDF.
