@@ -21,7 +21,8 @@ A Windows-first, offline PDF toolkit inspired by common PDF workflows. This is a
 - PDF to selectable text (.txt) using local text extraction
 - TXT to PDF with automatic line wrapping and pagination
 - Word, Excel, and PowerPoint files (DOC/DOCX/DOCM/ODT/RTF, XLS/XLSX/XLSM/ODS/CSV, PPT/PPTX/PPTM/ODP) to PDF
-- PDF to editable Word (DOCX) using local text extraction, and PowerPoint (PPTX) through LibreOffice\n- PDF text to Excel (XLSX), separated into worksheets by PDF page; column/table reconstruction is heuristic
+- PDF to editable Word (DOCX) using local text extraction, and PowerPoint (PPTX) through LibreOffice
+- PDF text to Excel (XLSX), separated into worksheets by PDF page; column/table reconstruction is heuristic
 
 ### Security
 - Protect a PDF with an open password
