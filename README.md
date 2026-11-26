@@ -28,7 +28,7 @@ A Windows-first, offline PDF toolkit inspired by common PDF workflows. This is a
 
 Also includes native file/folder pickers, output path selection, status messages, and error dialogs.
 
-**Conversion limitation:** PDF-to-text extracts text embedded in the PDF. Scanned/image-only pages require OCR, which is not yet included. PDF-to-image and Office document conversions are not yet implemented in this build and are not represented as completed features.
+**Conversion limitations:** PDF-to-text extracts selectable text only; scanned/image-only pages require OCR, which is not included yet. PDF-to-Excel extracts text into worksheets and does not guarantee original table layout. PDF-to-Word/PowerPoint may lose formatting because PDF does not preserve the original Office structure.
 
 ## Main feature coverage
 The wider iLovePDF catalog includes additional workflows such as PDF-to-image, OCR, compression, page reordering, watermarking, page numbering, forms, signatures, redaction, and repair. These are not all implemented yet. Office conversions use the free, open-source LibreOffice engine bundled in the portable package; it is a sizeable companion folder next to the app executable, not embedded inside the .NET EXE. All processing remains local, without paid services or cloud uploads.
