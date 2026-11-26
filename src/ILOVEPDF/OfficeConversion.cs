@@ -1,7 +1,5 @@
 using Microsoft.Win32;
 using System.Diagnostics;
-using System.IO.Compression;
-using System.Reflection;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Windows;
@@ -154,7 +152,7 @@ public partial class MainWindow
 
     private void ConvertWithLibreOffice(string inputFile, string targetExtension, string outputFolder)
     {
-        SetStatus("Preparing the embedded Office converter. First use may take a few minutes...");
+        SetStatus("Starting the local Office conversion engine...");
         var soffice = EnsureLibreOffice();
         Directory.CreateDirectory(outputFolder);
         var profile = Path.Combine(Path.GetTempPath(), "ILOVEPDF_LO_Profile_" + Guid.NewGuid().ToString("N"));
@@ -192,26 +190,10 @@ public partial class MainWindow
         var installed = FindLibreOffice();
         if (installed is not null) return installed;
 
-        var resourceName = Assembly.GetExecutingAssembly().GetManifestResourceNames()
-            .FirstOrDefault(name => name.EndsWith("LibreOfficeRuntime.zip", StringComparison.OrdinalIgnoreCase));
-        if (resourceName is null)
-            throw new FileNotFoundException("The embedded LibreOffice runtime is missing. Please use the official portable ILOVEPDF EXE build.");
-
-        var destination = Path.Combine(
-            Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-            "ILOVEPDF", "LibreOffice");
-        var executable = Path.Combine(destination, "program", "soffice.exe");
-        if (!File.Exists(executable))
-        {
-            if (Directory.Exists(destination)) Directory.Delete(destination, true);
-            Directory.CreateDirectory(destination);
-            using var archive = Assembly.GetExecutingAssembly().GetManifestResourceStream(resourceName)
-                ?? throw new FileNotFoundException("Could not read the embedded LibreOffice runtime.");
-            ZipFile.ExtractToDirectory(archive, destination);
-        }
-        if (!File.Exists(executable))
-            throw new IOException("LibreOffice runtime extraction did not produce soffice.exe.");
-        return executable;
+        throw new FileNotFoundException(
+            "Office conversion requires the free LibreOffice desktop application. " +
+            "Install it from https://www.libreoffice.org/download/download-libreoffice/, " +
+            "then restart ILOVEPDF. Native PDF and image tools work without LibreOffice.");
     }
 
     private static string? FindLibreOffice()
