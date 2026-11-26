@@ -26,9 +26,22 @@ jobs:
         run: dotnet build src/ILOVEPDF/ILOVEPDF.csproj -c Release --no-restore
       - name: Publish self-contained single-file EXE
         run: dotnet publish src/ILOVEPDF/ILOVEPDF.csproj -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -o artifacts/ILOVEPDF-win-x64
-      - name: Upload Windows EXE
+      - name: Install free Office conversion engine
+        run: choco install libreoffice-still --yes --no-progress --version=26.2.6
+      - name: Bundle LibreOffice beside the app
+        shell: pwsh
+        run: |
+          $source = "C:\\Program Files\\LibreOffice"
+          if (-not (Test-Path "$source\\program\\soffice.exe")) {
+            $source = "C:\\Program Files (x86)\\LibreOffice"
+          }
+          if (-not (Test-Path "$source\\program\\soffice.exe")) {
+            throw "LibreOffice installation was not found; Office conversions cannot be packaged."
+          }
+          Copy-Item $source "artifacts/ILOVEPDF-win-x64/LibreOffice" -Recurse -Force
+      - name: Upload portable Windows package
         uses: actions/upload-artifact@v4
         with:
-          name: ILOVEPDF-Windows-x64
+          name: ILOVEPDF-Windows-x64-Portable
           path: artifacts/ILOVEPDF-win-x64/
           if-no-files-found: error
