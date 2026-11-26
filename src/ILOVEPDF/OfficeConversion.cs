@@ -1,5 +1,7 @@
 using Microsoft.Win32;
 using System.Diagnostics;
+using System.IO.Compression;
+using System.Reflection;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Windows;
@@ -152,9 +154,7 @@ public partial class MainWindow
 
     private static void ConvertWithLibreOffice(string inputFile, string targetExtension, string outputFolder)
     {
-        var soffice = FindLibreOffice();
-        if (soffice is null)
-            throw new FileNotFoundException("LibreOffice conversion engine was not found. Use the portable ILOVEPDF package (with its LibreOffice folder) or install LibreOffice locally. No paid service is required.");
+        var soffice = EnsureLibreOffice();
         Directory.CreateDirectory(outputFolder);
         var profile = Path.Combine(Path.GetTempPath(), "ILOVEPDF_LO_Profile_" + Guid.NewGuid().ToString("N"));
         var start = new ProcessStartInfo
@@ -186,11 +186,40 @@ public partial class MainWindow
             throw new InvalidOperationException($"LibreOffice conversion failed. {error} {output}".Trim());
     }
 
+    private static string EnsureLibreOffice()
+    {
+        var installed = FindLibreOffice();
+        if (installed is not null) return installed;
+
+        var resourceName = Assembly.GetExecutingAssembly().GetManifestResourceNames()
+            .FirstOrDefault(name => name.EndsWith("LibreOfficeRuntime.zip", StringComparison.OrdinalIgnoreCase));
+        if (resourceName is null)
+            throw new FileNotFoundException("The embedded LibreOffice runtime is missing. Please use the official portable ILOVEPDF EXE build.");
+
+        var destination = Path.Combine(
+            Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+            "ILOVEPDF", "LibreOffice");
+        var executable = Path.Combine(destination, "program", "soffice.exe");
+        if (!File.Exists(executable))
+        {
+            if (Directory.Exists(destination)) Directory.Delete(destination, true);
+            Directory.CreateDirectory(destination);
+            using var archive = Assembly.GetExecutingAssembly().GetManifestResourceStream(resourceName)
+                ?? throw new FileNotFoundException("Could not read the embedded LibreOffice runtime.");
+            ZipFile.ExtractToDirectory(archive, destination);
+        }
+        if (!File.Exists(executable))
+            throw new IOException("LibreOffice runtime extraction did not produce soffice.exe.");
+        return executable;
+    }
+
     private static string? FindLibreOffice()
     {
         var baseDir = AppContext.BaseDirectory;
+        var localAppData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
         var candidates = new[]
         {
+            Path.Combine(localAppData, "ILOVEPDF", "LibreOffice", "program", "soffice.exe"),
             Path.Combine(baseDir, "LibreOffice", "program", "soffice.exe"),
             Path.Combine(baseDir, "tools", "LibreOffice", "program", "soffice.exe"),
             Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), "LibreOffice", "program", "soffice.exe"),
