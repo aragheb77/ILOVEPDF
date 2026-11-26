@@ -8,10 +8,11 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <AssemblyName>ILOVEPDF</AssemblyName>
     <RootNamespace>ILOVEPDF</RootNamespace>
-    <Version>0.1.0</Version>
+    <Version>0.2.0</Version>
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="PDFsharp" Version="6.2.0" />
+    <PackageReference Include="UglyToad.PdfPig" Version="0.1.9" />
   </ItemGroup>
 </Project>
