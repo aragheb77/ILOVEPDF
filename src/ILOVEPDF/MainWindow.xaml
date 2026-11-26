@@ -28,11 +28,16 @@
                     <Button Content="▧   Images to PDF" Background="Transparent" Foreground="#303238" HorizontalContentAlignment="Left" Click="ImagesToPdf_Click"/>
                     <Button Content="⇩   PDF to text" Background="Transparent" Foreground="#303238" HorizontalContentAlignment="Left" Click="PdfToText_Click"/>
                     <Button Content="▤   Text to PDF" Background="Transparent" Foreground="#303238" HorizontalContentAlignment="Left" Click="TextToPdf_Click"/>
+                    <TextBlock Text="OFFICE CONVERSION" Foreground="#8A8D94" FontSize="11" FontWeight="Bold" Margin="4,18,0,12"/>
+                    <Button Content="Office to PDF" Background="Transparent" Foreground="#303238" HorizontalContentAlignment="Left" Click="OfficeToPdf_Click"/>
+                    <Button Content="PDF to Word" Background="Transparent" Foreground="#303238" HorizontalContentAlignment="Left" Click="PdfToWord_Click"/>
+                    <Button Content="PDF to Excel" Background="Transparent" Foreground="#303238" HorizontalContentAlignment="Left" Click="PdfToExcel_Click"/>
+                    <Button Content="PDF to PowerPoint" Background="Transparent" Foreground="#303238" HorizontalContentAlignment="Left" Click="PdfToPowerPoint_Click"/>
                 </StackPanel>
                 <Border DockPanel.Dock="Bottom" Background="#F7F7F8" CornerRadius="12" Padding="12" Margin="0,20,0,0">
                     <StackPanel>
                         <TextBlock Text="PRIVATE BY DESIGN" FontWeight="Bold" FontSize="11" Foreground="#555A63"/>
-                        <TextBlock Text="Files stay on this device. No uploads or paid services." TextWrapping="Wrap" Foreground="#7B8088" FontSize="12" Margin="0,6,0,0"/>
+                        <TextBlock Text="Files stay on this device. Office conversion uses the bundled free engine; no uploads or paid services." TextWrapping="Wrap" Foreground="#7B8088" FontSize="12" Margin="0,6,0,0"/>
                     </StackPanel>
                 </Border>
             </DockPanel>
