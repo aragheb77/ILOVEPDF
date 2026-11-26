@@ -9,16 +9,19 @@ A Windows-first, offline PDF toolkit inspired by common PDF workflows. This is a
 - Third-party dependencies must be reviewed for license compatibility before shipping.
 - Publish reproducible builds and test results through GitHub Actions.
 
-## Current implementation
-The initial application foundation includes:
-- WPF desktop shell with a clean tool dashboard
-- Merge PDF
-- Split PDF into one-page files
-- Protect PDF with a password
-- PDF page rotation
-- Native Windows open/save dialogs and output folder selection
+## Implemented in the current source
+- WPF Windows desktop shell and tool dashboard
+- Merge multiple PDFs
+- Split into one-page PDF files
+- Extract pages by page ranges (for example `1,3-5`)
+- Remove pages by page ranges
+- Rotate all pages by 90 degrees
+- Protect a PDF with an open password
+- Native file/folder pickers, output path selection, and error dialogs
 
-## Planned feature parity roadmap
+These are implemented source features, not a claim that the full iLovePDF catalog is complete. The build workflow must pass and the operations need runtime testing against representative PDFs before calling this version release-ready.
+
+## Main feature coverage roadmap
 ### Organize
 Merge, split by ranges, extract pages, remove pages, reorder pages, rotate, scan/image-to-PDF, PDF/A export.
 
