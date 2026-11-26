@@ -24,41 +24,23 @@ jobs:
         run: dotnet restore src/ILOVEPDF/ILOVEPDF.csproj
       - name: Build
         run: dotnet build src/ILOVEPDF/ILOVEPDF.csproj -c Release --no-restore
-      - name: Install free Office conversion engine
-        run: choco install libreoffice-still --yes --no-progress --version=26.2.6
-      - name: Embed LibreOffice runtime into the EXE
-        shell: pwsh
-        run: |
-          $source = "C:\Program Files\LibreOffice"
-          if (-not (Test-Path "$source\program\soffice.exe")) {
-            $source = "C:\Program Files (x86)\LibreOffice"
-          }
-          if (-not (Test-Path "$source\program\soffice.exe")) {
-            throw "LibreOffice installation was not found; Office conversions cannot be packaged."
-          }
-          New-Item -ItemType Directory -Force "src/ILOVEPDF/Resources" | Out-Null
-          Compress-Archive -Path "$source\*" -DestinationPath "src/ILOVEPDF/Resources/LibreOfficeRuntime.zip" -CompressionLevel Optimal -Force
-      - name: Build with embedded Office runtime
-        run: dotnet build src/ILOVEPDF/ILOVEPDF.csproj -c Release --no-restore
-      - name: Publish self-contained single-file EXE
-        run: dotnet publish src/ILOVEPDF/ILOVEPDF.csproj -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -o artifacts/ILOVEPDF-win-x64
-      - name: Remove temporary embedded runtime archive
-        run: Remove-Item "src/ILOVEPDF/Resources/LibreOfficeRuntime.zip" -Force
+      - name: Publish compact self-contained single-file EXE
+        run: dotnet publish src/ILOVEPDF/ILOVEPDF.csproj -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -p:DebugType=None -p:DebugSymbols=false -o artifacts/ILOVEPDF-win-x64
       - name: Add third-party notices
         shell: pwsh
         run: |
           @"
           ILOVEPDF Desktop third-party notices
-          
-          LibreOffice is included in the ILOVEPDF.exe runtime bundle and is distributed under its applicable MPL-2.0 and LGPLv3+ licenses. The LibreOffice installation contains upstream license and notice files.
+
+          Office file conversions use LibreOffice when it is installed on the computer. LibreOffice is free and open source, distributed under its applicable MPL-2.0 and LGPLv3+ licenses. It is not bundled in this compact EXE; install it separately from https://www.libreoffice.org/download/download-libreoffice/ to enable Office conversions. No LibreOffice installation is required for the app's native PDF and image functions.
           Project dependencies include PDFsharp, PdfPig, ClosedXML, and DocumentFormat.OpenXml. See the project README and each upstream project for license terms.
-          
+
           ILOVEPDF is an independent project and is not affiliated with iLovePDF.
           "@ | Set-Content "artifacts/ILOVEPDF-win-x64/THIRD-PARTY-NOTICES.txt" -Encoding utf8
-      - name: Upload single-file Windows EXE
+      - name: Upload compact Windows EXE
         uses: actions/upload-artifact@v4
         with:
-          name: ILOVEPDF-Windows-x64-EXE
+          name: ILOVEPDF-Windows-x64-Compact
           path: |
             artifacts/ILOVEPDF-win-x64/ILOVEPDF.exe
             artifacts/ILOVEPDF-win-x64/THIRD-PARTY-NOTICES.txt
