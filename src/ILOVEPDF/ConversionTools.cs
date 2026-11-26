@@ -5,7 +5,6 @@ using PdfSharp.Pdf.IO;
 using System.Text;
 using System.Windows;
 using System.Windows.Media.Imaging;
-using UglyToad.PdfPig;
 
 namespace ILOVEPDF;
 
@@ -73,7 +72,7 @@ public partial class MainWindow
             if (save.ShowDialog(this) != true) return;
 
             var text = new StringBuilder();
-            using (var pdf = PdfDocument.Open(files[0]))
+            using (var pdf = UglyToad.PdfPig.PdfDocument.Open(files[0]))
             {
                 foreach (var page in pdf.GetPages())
                 {
@@ -120,7 +119,7 @@ public partial class MainWindow
             }
 
             NewPage();
-            var maxWidth = PdfSharp.PageSizeConverter.ToPoint(PdfSharp.PageSize.A4).Width - margin * 2;
+            const double maxWidth = 595.28 - margin * 2;
             foreach (var sourceLine in text.Replace("\r\n", "\n").Replace('\r', '\n').Split('\n'))
             {
                 if (sourceLine.Length == 0)
