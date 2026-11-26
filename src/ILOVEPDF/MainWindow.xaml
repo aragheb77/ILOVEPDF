@@ -1,0 +1,68 @@
+<Window x:Class="ILOVEPDF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="ILOVEPDF — PDF Tools" Height="760" Width="1120"
+        MinHeight="650" MinWidth="920" WindowStartupLocation="CenterScreen"
+        Background="#F5F6F8" FontFamily="Segoe UI">
+    <Grid>
+        <Grid.ColumnDefinitions><ColumnDefinition Width="230"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+        <Border Grid.Column="0" Background="#FFFFFF" BorderBrush="#E8E9EC" BorderThickness="0,0,1,0">
+            <DockPanel Margin="20">
+                <StackPanel DockPanel.Dock="Top">
+                    <StackPanel Orientation="Horizontal" Margin="0,8,0,28">
+                        <Border Width="34" Height="34" Background="#E5322D" CornerRadius="9">
+                            <TextBlock Text="PDF" Foreground="White" FontWeight="Bold" FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <TextBlock Text="ILOVEPDF" FontSize="19" FontWeight="Bold" Foreground="#202124" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                    </StackPanel>
+                    <TextBlock Text="WORKSPACE" Foreground="#8A8D94" FontSize="11" FontWeight="Bold" Margin="4,0,0,12"/>
+                    <Button Content="⌂   Home" Background="#FFF0EF" Foreground="#D92D27" HorizontalContentAlignment="Left" Click="Home_Click"/>
+                    <TextBlock Text="PDF TOOLS" Foreground="#8A8D94" FontSize="11" FontWeight="Bold" Margin="4,18,0,12"/>
+                    <Button Content="⇄   Merge PDF" Background="Transparent" Foreground="#303238" HorizontalContentAlignment="Left" Click="Merge_Click"/>
+                    <Button Content="▤   Split PDF" Background="Transparent" Foreground="#303238" HorizontalContentAlignment="Left" Click="Split_Click"/>
+                    <Button Content="↻   Rotate PDF" Background="Transparent" Foreground="#303238" HorizontalContentAlignment="Left" Click="Rotate_Click"/>
+                    <Button Content="🔒   Protect PDF" Background="Transparent" Foreground="#303238" HorizontalContentAlignment="Left" Click="Protect_Click"/>
+                </StackPanel>
+                <Border DockPanel.Dock="Bottom" Background="#F7F7F8" CornerRadius="12" Padding="12" Margin="0,20,0,0">
+                    <StackPanel>
+                        <TextBlock Text="PRIVATE BY DESIGN" FontWeight="Bold" FontSize="11" Foreground="#555A63"/>
+                        <TextBlock Text="Files stay on this device. No uploads or paid services." TextWrapping="Wrap" Foreground="#7B8088" FontSize="12" Margin="0,6,0,0"/>
+                    </StackPanel>
+                </Border>
+            </DockPanel>
+        </Border>
+        <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Auto">
+            <StackPanel Margin="38,30,38,38">
+                <TextBlock Text="Your PDF workspace" FontSize="30" FontWeight="Bold" Foreground="#202124"/>
+                <TextBlock Text="Everything you need to work with documents — right on your PC." FontSize="15" Foreground="#747982" Margin="0,8,0,28"/>
+                <Border Background="#FFFFFF" CornerRadius="16" Padding="24" BorderBrush="#E9EAED" BorderThickness="1">
+                    <StackPanel>
+                        <TextBlock Text="Popular tools" FontSize="20" FontWeight="Bold" Foreground="#202124" Margin="0,0,0,18"/>
+                        <UniformGrid Columns="2">
+                            <Button Height="100" Background="#FFF3F2" Foreground="#D92D27" Click="Merge_Click" HorizontalContentAlignment="Left">
+                                <StackPanel><TextBlock Text="⇄" FontSize="26"/><TextBlock Text="Merge PDF" FontSize="16"/><TextBlock Text="Combine documents" FontSize="12" FontWeight="Normal" Foreground="#777"/></StackPanel>
+                            </Button>
+                            <Button Height="100" Background="#F2F5FF" Foreground="#3457B1" Click="Split_Click" HorizontalContentAlignment="Left">
+                                <StackPanel><TextBlock Text="▤" FontSize="26"/><TextBlock Text="Split PDF" FontSize="16"/><TextBlock Text="Separate pages" FontSize="12" FontWeight="Normal" Foreground="#777"/></StackPanel>
+                            </Button>
+                            <Button Height="100" Background="#F2FAF5" Foreground="#24834A" Click="Rotate_Click" HorizontalContentAlignment="Left">
+                                <StackPanel><TextBlock Text="↻" FontSize="26"/><TextBlock Text="Rotate PDF" FontSize="16"/><TextBlock Text="Rotate pages 90°" FontSize="12" FontWeight="Normal" Foreground="#777"/></StackPanel>
+                            </Button>
+                            <Button Height="100" Background="#FFF8E9" Foreground="#A36A00" Click="Protect_Click" HorizontalContentAlignment="Left">
+                                <StackPanel><TextBlock Text="🔒" FontSize="26"/><TextBlock Text="Protect PDF" FontSize="16"/><TextBlock Text="Set an open password" FontSize="12" FontWeight="Normal" Foreground="#777"/></StackPanel>
+                            </Button>
+                        </UniformGrid>
+                    </StackPanel>
+                </Border>
+                <Border Background="#FFFFFF" CornerRadius="16" Padding="24" Margin="0,20,0,0" BorderBrush="#E9EAED" BorderThickness="1">
+                    <StackPanel>
+                        <TextBlock Text="Quick actions" FontSize="20" FontWeight="Bold" Foreground="#202124"/>
+                        <TextBlock Text="Choose a tool to get started. The original files are never overwritten." Foreground="#747982" Margin="0,6,0,0"/>
+                        <TextBlock x:Name="StatusText" Text="Ready — choose a PDF tool." Foreground="#444A53" FontSize="13" Margin="0,20,0,0" TextWrapping="Wrap"/>
+                    </StackPanel>
+                </Border>
+                <TextBlock Text="ILOVEPDF Desktop • Offline processing" Foreground="#9A9DA4" FontSize="12" Margin="2,24,0,0"/>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Window>
