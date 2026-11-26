@@ -152,8 +152,9 @@ public partial class MainWindow
         catch (Exception ex) { ShowError("PDF to Excel", ex); }
     }
 
-    private static void ConvertWithLibreOffice(string inputFile, string targetExtension, string outputFolder)
+    private void ConvertWithLibreOffice(string inputFile, string targetExtension, string outputFolder)
     {
+        SetStatus("Preparing the embedded Office converter. First use may take a few minutes...");
         var soffice = EnsureLibreOffice();
         Directory.CreateDirectory(outputFolder);
         var profile = Path.Combine(Path.GetTempPath(), "ILOVEPDF_LO_Profile_" + Guid.NewGuid().ToString("N"));
