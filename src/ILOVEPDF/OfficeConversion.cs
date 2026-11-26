@@ -11,7 +11,7 @@ namespace ILOVEPDF;
 public partial class MainWindow
 {
     private static readonly string[] OfficeExtensions =
-        [".doc", ".docx", ".odt", ".rtf", ".xls", ".xlsx", ".ods", ".csv", ".ppt", ".pptx", ".odp"];
+        [".doc", ".docx", ".docm", ".odt", ".rtf", ".xls", ".xlsx", ".xlsm", ".ods", ".csv", ".ppt", ".pptx", ".pptm", ".odp"];
 
     private void OfficeToPdf_Click(object sender, RoutedEventArgs e)
     {
@@ -20,7 +20,7 @@ public partial class MainWindow
             var picker = new OpenFileDialog
             {
                 Title = "Choose Word, Excel, or PowerPoint files",
-                Filter = "Office documents|*.doc;*.docx;*.odt;*.rtf;*.xls;*.xlsx;*.ods;*.csv;*.ppt;*.pptx;*.odp",
+                Filter = "Office documents|*.doc;*.docx;*.docm;*.odt;*.rtf;*.xls;*.xlsx;*.xlsm;*.ods;*.csv;*.ppt;*.pptx;*.pptm;*.odp",
                 Multiselect = true,
                 CheckFileExists = true
             };
@@ -34,10 +34,16 @@ public partial class MainWindow
                 if (!OfficeExtensions.Contains(Path.GetExtension(file).ToLowerInvariant()))
                     throw new InvalidOperationException($"Unsupported Office file: {Path.GetFileName(file)}");
                 var output = Path.Combine(folder.FolderName, Path.GetFileNameWithoutExtension(file) + ".pdf");
-                ConvertWithLibreOffice(file, "pdf", folder.FolderName);
-                var generated = Path.Combine(folder.FolderName, Path.GetFileNameWithoutExtension(file) + ".pdf");
-                if (!File.Exists(generated)) throw new IOException($"LibreOffice did not create a PDF for {Path.GetFileName(file)}.");
-                if (!string.Equals(generated, output, StringComparison.OrdinalIgnoreCase)) File.Copy(generated, output, true);
+                var tempFolder = Path.Combine(Path.GetTempPath(), "ILOVEPDF", Guid.NewGuid().ToString("N"));
+                Directory.CreateDirectory(tempFolder);
+                try
+                {
+                    ConvertWithLibreOffice(file, "pdf", tempFolder);
+                    var generated = Path.Combine(tempFolder, Path.GetFileNameWithoutExtension(file) + ".pdf");
+                    if (!File.Exists(generated)) throw new IOException($"LibreOffice did not create a PDF for {Path.GetFileName(file)}.");
+                    File.Copy(generated, output, true);
+                }
+                finally { try { Directory.Delete(tempFolder, true); } catch { } }
                 converted++;
             }
             SetStatus($"Converted {converted} Office file(s) to PDF in {folder.FolderName}");
