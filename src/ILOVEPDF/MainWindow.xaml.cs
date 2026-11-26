@@ -2,6 +2,7 @@ using Microsoft.Win32;
 using PdfSharp.Pdf;
 using PdfSharp.Pdf.IO;
 using System.Windows;
+using System.IO;
 
 namespace ILOVEPDF;
 
