@@ -20,6 +20,8 @@
                     <TextBlock Text="PDF TOOLS" Foreground="#8A8D94" FontSize="11" FontWeight="Bold" Margin="4,18,0,12"/>
                     <Button Content="⇄   Merge PDF" Background="Transparent" Foreground="#303238" HorizontalContentAlignment="Left" Click="Merge_Click"/>
                     <Button Content="▤   Split PDF" Background="Transparent" Foreground="#303238" HorizontalContentAlignment="Left" Click="Split_Click"/>
+                    <Button Content="↗   Extract pages" Background="Transparent" Foreground="#303238" HorizontalContentAlignment="Left" Click="Extract_Click"/>
+                    <Button Content="−   Remove pages" Background="Transparent" Foreground="#303238" HorizontalContentAlignment="Left" Click="RemovePages_Click"/>
                     <Button Content="↻   Rotate PDF" Background="Transparent" Foreground="#303238" HorizontalContentAlignment="Left" Click="Rotate_Click"/>
                     <Button Content="🔒   Protect PDF" Background="Transparent" Foreground="#303238" HorizontalContentAlignment="Left" Click="Protect_Click"/>
                 </StackPanel>
