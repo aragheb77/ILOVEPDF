@@ -24,6 +24,10 @@
                     <Button Content="−   Remove pages" Background="Transparent" Foreground="#303238" HorizontalContentAlignment="Left" Click="RemovePages_Click"/>
                     <Button Content="↻   Rotate PDF" Background="Transparent" Foreground="#303238" HorizontalContentAlignment="Left" Click="Rotate_Click"/>
                     <Button Content="🔒   Protect PDF" Background="Transparent" Foreground="#303238" HorizontalContentAlignment="Left" Click="Protect_Click"/>
+                    <TextBlock Text="CONVERT" Foreground="#8A8D94" FontSize="11" FontWeight="Bold" Margin="4,18,0,12"/>
+                    <Button Content="▧   Images to PDF" Background="Transparent" Foreground="#303238" HorizontalContentAlignment="Left" Click="ImagesToPdf_Click"/>
+                    <Button Content="⇩   PDF to text" Background="Transparent" Foreground="#303238" HorizontalContentAlignment="Left" Click="PdfToText_Click"/>
+                    <Button Content="▤   Text to PDF" Background="Transparent" Foreground="#303238" HorizontalContentAlignment="Left" Click="TextToPdf_Click"/>
                 </StackPanel>
                 <Border DockPanel.Dock="Bottom" Background="#F7F7F8" CornerRadius="12" Padding="12" Margin="0,20,0,0">
                     <StackPanel>
@@ -47,11 +51,11 @@
                             <Button Height="100" Background="#F2F5FF" Foreground="#3457B1" Click="Split_Click" HorizontalContentAlignment="Left">
                                 <StackPanel><TextBlock Text="▤" FontSize="26"/><TextBlock Text="Split PDF" FontSize="16"/><TextBlock Text="Separate pages" FontSize="12" FontWeight="Normal" Foreground="#777"/></StackPanel>
                             </Button>
-                            <Button Height="100" Background="#F2FAF5" Foreground="#24834A" Click="Rotate_Click" HorizontalContentAlignment="Left">
-                                <StackPanel><TextBlock Text="↻" FontSize="26"/><TextBlock Text="Rotate PDF" FontSize="16"/><TextBlock Text="Rotate pages 90°" FontSize="12" FontWeight="Normal" Foreground="#777"/></StackPanel>
+                            <Button Height="100" Background="#F2FAF5" Foreground="#24834A" Click="ImagesToPdf_Click" HorizontalContentAlignment="Left">
+                                <StackPanel><TextBlock Text="▧" FontSize="26"/><TextBlock Text="Images to PDF" FontSize="16"/><TextBlock Text="Convert JPG, PNG, BMP" FontSize="12" FontWeight="Normal" Foreground="#777"/></StackPanel>
                             </Button>
-                            <Button Height="100" Background="#FFF8E9" Foreground="#A36A00" Click="Protect_Click" HorizontalContentAlignment="Left">
-                                <StackPanel><TextBlock Text="🔒" FontSize="26"/><TextBlock Text="Protect PDF" FontSize="16"/><TextBlock Text="Set an open password" FontSize="12" FontWeight="Normal" Foreground="#777"/></StackPanel>
+                            <Button Height="100" Background="#FFF8E9" Foreground="#A36A00" Click="PdfToText_Click" HorizontalContentAlignment="Left">
+                                <StackPanel><TextBlock Text="⇩" FontSize="26"/><TextBlock Text="PDF to text" FontSize="16"/><TextBlock Text="Extract selectable text" FontSize="12" FontWeight="Normal" Foreground="#777"/></StackPanel>
                             </Button>
                         </UniformGrid>
                     </StackPanel>
