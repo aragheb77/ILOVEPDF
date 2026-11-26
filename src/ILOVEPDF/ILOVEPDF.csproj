@@ -17,4 +17,7 @@
     <PackageReference Include="ClosedXML" Version="0.104.2" />
     <PackageReference Include="DocumentFormat.OpenXml" Version="3.3.0" />
   </ItemGroup>
+  <ItemGroup Condition="Exists('Resources/LibreOfficeRuntime.zip')">
+    <EmbeddedResource Include="Resources/LibreOfficeRuntime.zip" />
+  </ItemGroup>
 </Project>
