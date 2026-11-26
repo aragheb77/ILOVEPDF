@@ -31,11 +31,11 @@ jobs:
       - name: Bundle LibreOffice beside the app
         shell: pwsh
         run: |
-          $source = "C:\\Program Files\\LibreOffice"
-          if (-not (Test-Path "$source\\program\\soffice.exe")) {
-            $source = "C:\\Program Files (x86)\\LibreOffice"
+          $source = "C:\Program Files\LibreOffice"
+          if (-not (Test-Path "$source\program\soffice.exe")) {
+            $source = "C:\Program Files (x86)\LibreOffice"
           }
-          if (-not (Test-Path "$source\\program\\soffice.exe")) {
+          if (-not (Test-Path "$source\program\soffice.exe")) {
             throw "LibreOffice installation was not found; Office conversions cannot be packaged."
           }
           Copy-Item $source "artifacts/ILOVEPDF-win-x64/LibreOffice" -Recurse -Force
